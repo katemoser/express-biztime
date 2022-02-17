@@ -3,13 +3,21 @@
 
 const express = require("express");
 const { NotFoundError } = require("./expressError");
+
 const companyRoutes = require("./routes/companies");
+const invoiceRoutes = require("./routes/invoices");
+
 const app = express();
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 /** Route to handle companies, show list, add, update, delete */
 app.use("/companies", companyRoutes);
+
+/**Routes to handle invoices */
+app.use("/invoices", invoiceRoutes);
 
 /** 404 handler: matches unmatched routes; raises NotFoundError. */
 app.use(function (req, res, next) {

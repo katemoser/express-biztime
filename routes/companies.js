@@ -10,11 +10,11 @@ returns {companies: [{code, name}, ...]}
 router.get("/", async function (req, res, next) {
   const results = await db.query(
     `SELECT code, name 
-          FROM companies`
+          FROM companies
+          ORDER BY code`
   );
-//   TODO: order by code or name(all select)
-//   TODO: 404 handler
   const companies = results.rows;
+  if (!companies) throw new NotFoundError(`Could not find any companies!`);
   return res.json({ companies });
 });
 
@@ -27,10 +27,14 @@ router.get("/:code", async function (req, res, next) {
   const results = await db.query(
     `SELECT code, name, description
             FROM companies
-            WHERE code = $1`,
+            WHERE code = $1
+            ORDER BY code`,
     [code]
   );
   const company = results.rows;
+
+  if (!company) throw new NotFoundError(`Not found ${code}`);
+
   return res.json({ company });
 });
 
