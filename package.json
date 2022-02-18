@@ -2,12 +2,14 @@
   "name": "express-biztime",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "dependencies": {
     "express": "^5.0.0-beta.1",
     "pg": "^8.7.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "supertest": "^6.2.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
